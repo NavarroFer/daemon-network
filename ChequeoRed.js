@@ -2,7 +2,9 @@ const dbus = require("dbus-next");
 const fs = require('fs');
 const bus = dbus.systemBus();
 
-var dirLog = '/var/log/'
+var daemon = require('./daemon')
+
+var dirLog = '/var/log/network-daemon/'
 
 const estados = {
     OFFLINE: 0,
@@ -25,6 +27,8 @@ var estadoActual = estados.OFFLINE;
 async function main() {
     let obj = await bus.getProxyObject('org.freedesktop.NetworkManager', '/org/freedesktop/NetworkManager');
     let properties = obj.getInterface('org.freedesktop.DBus.Properties');
+
+    daemon();
 
     properties.on('PropertiesChanged', (iface,changed,invalidated) => {
         let state = changed.State;

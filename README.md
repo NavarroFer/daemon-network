@@ -27,15 +27,25 @@ Para usar la implementacion en NodeJs:
 2. Instalar NPM packages
    ```sh
    npm install dbus-next
-   npm install pm2
    ```
-3. Ejecutar ChequeoRed.js
+
+3. Crear directorio para logs dentrto de /var/log/:
    ```sh
-   pm2 start ChequeoRed.js
+   sudo mkdir /var/log/network-daemon
+   ```
+
+4. Transferir propiedad al `usuario` que ejecutará el daemon:
+
+   ```sh
+   sudo chown usuario /var/log/network-daemon
+   ```
+
+5. Ejecutar ChequeoRed.js
+   ```sh
+   node ChequeoRed.js
    ```
 
 ## Fuentes
 * [Daemon skeleton en c](https://github.com/pasce/daemon-skeleton-linux-c)
 * [Npm Dbus next](https://www.npmjs.com/package/dbus-next)
 * [Enum state NetworkManager](https://people.freedesktop.org/~lkundrak/nm-docs/nm-dbus-types.html)
-* [pm2](https://github.com/Unitech/pm2)
